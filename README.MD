@@ -11,8 +11,8 @@ The common, multiplatform code is fully tested with 100% test coverage in
 ```
 shared/src/commonTest/kotlin/com/rodi/bonprix/WardrobeClientTest.kt
 ```
-
-![img.png](img.png) ![img_1.png](img_1.png)
+<img src="img.png" width="300" height="200">
+<img src="img_1.png" width="300" height="200">
 
 
 ### Publish to MavenLocal
