@@ -8,7 +8,7 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(24)
 
     androidTarget()
     jvm()
@@ -36,6 +36,10 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
+
+            // dependency fuer die Library:
+            // extern einbinden mit
+            //implementation("com.rodi.bonprix:shared:1.0.0")
             implementation(project(":shared"))
         }
 

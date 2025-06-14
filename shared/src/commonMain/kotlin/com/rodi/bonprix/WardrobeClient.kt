@@ -9,6 +9,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 expect fun provideHttpClient(): HttpClient
+expect suspend fun getWardrobeItems(): List<WardrobeItem>
 
 val URL : String = "https://assets.www.bonprix.com"
 val PORT : String = "443" // HTTPS
@@ -37,10 +38,8 @@ class WardrobeClient {
         return getItems(null, category)
     }
 
-    suspend fun getItemById(id: Long): WardrobeItem? {
-        val wardrobeItems = getItems(null, null)
-        val itemById = wardrobeItems.filter { it.id == id }
-        return itemById.firstOrNull()
+    suspend fun getItemById(id: String): WardrobeItem? {
+        return getItems().find { it.id.toString() == id }
     }
 
 }

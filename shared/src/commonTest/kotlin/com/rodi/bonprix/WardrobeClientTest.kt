@@ -9,6 +9,7 @@ import kotlin.test.assertTrue
 
 class WardrobeClientTest {
     object Constants{
+        const val ID: String = "17"
         const val CATEGORY: String = "Jacket"
         const val COLOR: String = "White"
     }
@@ -45,7 +46,7 @@ class WardrobeClientTest {
     @Test
     fun testGetItemById() = runTest {
         val wardrobeClient = WardrobeClient()
-        val item = wardrobeClient.getItemById(17L)
+        val item = wardrobeClient.getItemById(Constants.ID)
 
         assertTrue { item!=null }
         assertEquals(17L, item?.id)

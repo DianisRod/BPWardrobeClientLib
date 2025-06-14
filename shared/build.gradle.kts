@@ -1,4 +1,6 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -9,13 +11,28 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(17)
-
+    jvmToolchain(24)
     androidTarget { publishLibraryVariants("release") }
     jvm()
     js { browser() }
-    wasmJs { browser() }
-    iosX64()
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser {
+            val rootDirPath = project.rootDir.path
+            val projectDirPath = project.projectDir.path
+            commonWebpackConfig {
+                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                    static = (static ?: mutableListOf()).apply {
+                        // Serve sources to debug inside browser
+                        add(rootDirPath)
+                        add(projectDirPath)
+                    }
+                }
+            }
+        }
+    }
+//    iosX64()
 //    iosArm64()
 //    iosSimulatorArm64()
 
@@ -86,7 +103,7 @@ mavenPublishing {
     pom {
         name = "BpWardrobeClient"
         description = "Kotlin Multiplatform library"
-        url = "github url" //todo
+        url = "https://github.com/DianisRod"
 
         licenses {
             license {
@@ -97,14 +114,14 @@ mavenPublishing {
 
         developers {
             developer {
-                id = "" //todo
-                name = "" //todo
-                email = "" //todo
+                id = "RoDi"
+                name = "Diana Rodriguez"
+                email = "diana.n.rodriguez.martinez@gmail.com"
             }
         }
 
         scm {
-            url = "github url" //todo
+            url = "https://github.com/DianisRod"
         }
     }
     if (project.hasProperty("signing.keyId")) signAllPublications()
