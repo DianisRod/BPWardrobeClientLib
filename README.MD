@@ -7,6 +7,7 @@ The implementation is aimed to be modular, extensible and adaptable, instead of 
 
 So far, the library provides a service for android applications.
 
+### Testing
 The common, multiplatform code is fully tested with 100% test coverage in
 ```
 shared/src/commonTest/kotlin/com/rodi/bonprix/WardrobeClientTest.kt
@@ -16,6 +17,7 @@ shared/src/commonTest/kotlin/com/rodi/bonprix/WardrobeClientTest.kt
 <img src="testCoverage.png" width="300" height="200">
 
 
+### UI
 The app code works on
 
 <table>
