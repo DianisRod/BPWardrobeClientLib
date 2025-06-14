@@ -28,7 +28,7 @@ The app code works on
 <tr>
 <td valign="top">
 
-<img src="app_Android.png" width="300" height="600">
+<img src="app_Android.png" width="200" height="300">
 
 </td>
 <td valign="top">
