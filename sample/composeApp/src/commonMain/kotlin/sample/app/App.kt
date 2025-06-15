@@ -108,7 +108,9 @@ private suspend fun getUiWardrobeItems(color: String?, category: String?): Strin
     // alle items mit Index und kompatiblen Teilen:
 
     val idxRange = (0 .. wardrobeItems.size-1)
-    val itemsString = idxRange.joinToString("\n") { it.toString() +": "+ wardrobeItems[it].name+",\n\tcompatible with "+wardrobeItems[it].compatibleWith }
+    val itemsString = idxRange.joinToString("\n") {
+        wardrobeItems[it].toString()
+    }
 
     println(itemsString)
     return(itemsString)
