@@ -29,13 +29,10 @@ The app code works on
 </tr>
 <tr>
 <td valign="top">
-
-
-<img src="app_Android.png" width="200" height="300">
+<img src="app_android.png" width="200" height="300">
 
 </td>
 <td valign="top">
-
 <img src="app_wasmJsMain.png" width="300" height="200">
 
 </td>
