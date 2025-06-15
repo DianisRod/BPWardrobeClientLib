@@ -38,8 +38,8 @@ class WardrobeClient {
         return getItems().find { it.id.toString() == id }
     }
 
-    suspend fun getItemByCompatibleItem(compatibleItem: String): WardrobeItem? {
-        return TODO()
+    suspend fun getItemByCompatibleItem(compatibleItem: String): List<WardrobeItem> {
+        return getItems().filter { it.compatibleWith.contains(compatibleItem) }
     }
 
     suspend fun commonGetWardrobeItems(): List<WardrobeItem> {

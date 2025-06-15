@@ -4,7 +4,6 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
-import kotlin.test.assertSame
 import kotlin.test.assertTrue
 
 class WardrobeClientTest {
@@ -12,6 +11,8 @@ class WardrobeClientTest {
         const val ID: String = "17"
         const val CATEGORY: String = "Jacket"
         const val COLOR: String = "White"
+        const val COMPATIBLE_ITEM: String = "Dress"
+
     }
 
     @Test
@@ -55,5 +56,15 @@ class WardrobeClientTest {
         assertEquals("Emerald", item?.color)
         assertEquals("Jersey", item?.material)
         assertContentEquals(listOf("Shoes", "Accessories"), item?.compatibleWith)
+    }
+
+    @Test
+    fun testGetItemByCompatibleItem() = runTest {
+        val wardrobeClient = WardrobeClient()
+        val items: List<WardrobeItem> = wardrobeClient.getItemByCompatibleItem(Constants.COMPATIBLE_ITEM)
+
+        assertTrue { items.isNotEmpty() }
+        assertTrue (items.none { it.id == 1L })
+        assertTrue(items.any { it.id == 2L })
     }
 }
