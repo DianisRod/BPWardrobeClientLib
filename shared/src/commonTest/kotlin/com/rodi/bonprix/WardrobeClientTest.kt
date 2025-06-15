@@ -4,6 +4,7 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 
 class WardrobeClientTest {
@@ -66,5 +67,19 @@ class WardrobeClientTest {
         assertTrue { items.isNotEmpty() }
         val itemWithoutSpecifiedCompItem : WardrobeItem? = items.find { !it.compatibleWith.contains(Constants.COMPATIBLE_ITEM) }
         assertEquals(null, itemWithoutSpecifiedCompItem)
+    }
+
+    @Test
+    fun testCommonWardrobeItemsIsNotNull() = runTest {
+        val wardrobeClient = WardrobeClient()
+        val getItems = wardrobeClient.commonGetWardrobeItems(Constants.COLOR, Constants.COMPATIBLE_ITEM)
+        assertTrue { getItems.isNotEmpty() }
+    }
+
+    @Test
+    fun testCommonWardrobeItemsIsNull() = runTest {
+        val wardrobeClient = WardrobeClient()
+        val getItems = wardrobeClient.commonGetWardrobeItems(null, "nonExistingCategory")
+        assertTrue { getItems.isEmpty() }
     }
 }

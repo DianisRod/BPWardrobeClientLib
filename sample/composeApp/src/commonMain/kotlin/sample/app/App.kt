@@ -1,6 +1,8 @@
 package sample.app
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -29,74 +31,80 @@ fun App() {
         var categoryItemsText by remember { mutableStateOf("") }
         var colorItemsText by remember { mutableStateOf("") }
 
-        Column(
-            modifier = Modifier
-                .safeContentPadding()
-                .fillMaxSize()
-                .width(700.dp),
-
-            horizontalAlignment = Alignment.CenterHorizontally,
+        Box(
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
         ) {
-            Row(
-                modifier = Modifier,//.fillMaxHeight(),
-                horizontalArrangement = Arrangement.Center,
-            ){
-                OutlinedTextField(
-                    value = categoryItemsText,
-                    onValueChange = { categoryItemsText = it },
-                    label = { Text("category")
-                    }
-                )
-            }
-
-            Row(
-                modifier = Modifier,//.fillMaxHeight(),
-                horizontalArrangement = Arrangement.Center,
-            ){
-                OutlinedTextField(
-                    value = colorItemsText,
-                    onValueChange = { colorItemsText = it },
-                    label = {
-                        Text("color")
-                    }
-                )
-            }
-
-            Row(
-                modifier = Modifier,//.fillMaxHeight(),
-                horizontalArrangement = Arrangement.Center,
-            ) {
-                Button(onClick = {
-                    wardrobeItemsText = "Loading..."
-                    coroutineScope.launch {
-                        wardrobeItemsText = getUiWardrobeItems(colorItemsText,categoryItemsText)
-                    }
-                }) {
-                    Text("Get wardrobe items!")
-                }
-                Button(onClick = {
-                    wardrobeItemsText = ""
-                    categoryItemsText = ""
-                    colorItemsText = ""
-
-                }) {
-                    Text("Clear")
-                }
-            }
-
-            TextField(
-                value = wardrobeItemsText,
-                onValueChange = { wardrobeItemsText = it },
-                label = { Text("") },
+            Column(
                 modifier = Modifier
-                    .fillMaxHeight()
-            )
+                    .safeContentPadding()
+                    .fillMaxSize()
+                    .width(700.dp),
+
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Row(
+                    modifier = Modifier,//.fillMaxHeight(),
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    OutlinedTextField(
+                        value = categoryItemsText,
+                        onValueChange = { categoryItemsText = it },
+                        label = {
+                            Text("category")
+                        }
+                    )
+                }
+
+                Row(
+                    modifier = Modifier,//.fillMaxHeight(),
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    OutlinedTextField(
+                        value = colorItemsText,
+                        onValueChange = { colorItemsText = it },
+                        label = {
+                            Text("color")
+                        }
+                    )
+                }
+
+                Row(
+                    modifier = Modifier,//.fillMaxHeight(),
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    Button(onClick = {
+                        wardrobeItemsText = "Loading..."
+                        coroutineScope.launch {
+                            wardrobeItemsText = getUiWardrobeItems(colorItemsText, categoryItemsText)
+                        }
+                    }) {
+                        Text("Get wardrobe items!")
+                    }
+                    Button(onClick = {
+                        wardrobeItemsText = ""
+                        categoryItemsText = ""
+                        colorItemsText = ""
+
+                    }) {
+                        Text("Clear")
+                    }
+                }
+
+                TextField(
+                    value = wardrobeItemsText,
+                    onValueChange = { wardrobeItemsText = it },
+                    label = { Text("") },
+                    modifier = Modifier
+                        .fillMaxHeight()
+                )
+            }
         }
     }
+
 }
 
 private suspend fun getUiWardrobeItems(color: String?, category: String?): String {
-    val wardrobeItems : List<WardrobeItem> = getWardrobeItems(color, category)
+    val wardrobeItems: List<WardrobeItem> = getWardrobeItems(color, category)
 
     // alle items:
     //val itemsString : String = wardrobeItems.joinToString("\n") { it.name }
@@ -107,11 +115,11 @@ private suspend fun getUiWardrobeItems(color: String?, category: String?): Strin
 
     // alle items mit Index und kompatiblen Teilen:
 
-    val idxRange = (0 .. wardrobeItems.size-1)
+    val idxRange = (0..wardrobeItems.size - 1)
     val itemsString = idxRange.joinToString("\n") {
         wardrobeItems[it].toString()
     }
 
     println(itemsString)
-    return(itemsString)
+    return (itemsString)
 }
