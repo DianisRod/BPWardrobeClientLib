@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -17,7 +16,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.rodi.bonprix.WardrobeClient
 import com.rodi.bonprix.WardrobeItem
 import com.rodi.bonprix.getWardrobeItems
 import kotlinx.coroutines.launch
@@ -108,6 +106,7 @@ private suspend fun getUiWardrobeItems(color: String?, category: String?): Strin
     //val itemsString = idxRange.joinToString("\n") { it.toString() +" "+ wardrobeItems[it].name }
 
     // alle items mit Index und kompatiblen Teilen:
+
     val idxRange = (0 .. wardrobeItems.size-1)
     val itemsString = idxRange.joinToString("\n") { it.toString() +": "+ wardrobeItems[it].name+",\n\tcompatible with "+wardrobeItems[it].compatibleWith }
 

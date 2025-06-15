@@ -64,7 +64,7 @@ class WardrobeClientTest {
         val items: List<WardrobeItem> = wardrobeClient.getItemByCompatibleItem(Constants.COMPATIBLE_ITEM)
 
         assertTrue { items.isNotEmpty() }
-        assertTrue (items.none { it.id == 1L })
-        assertTrue(items.any { it.id == 2L })
+        val itemWithoutSpecifiedCompItem : WardrobeItem? = items.find { !it.compatibleWith.contains(Constants.COMPATIBLE_ITEM) }
+        assertEquals(null, itemWithoutSpecifiedCompItem)
     }
 }
