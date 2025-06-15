@@ -14,8 +14,7 @@ shared/src/commonTest/kotlin/com/rodi/bonprix/WardrobeClientTest.kt
 ```
 <img src="tests.png" width="300" height="200">
 
-<img src="testCoverage.png" width="300" height="200">
-
+<img src="testCoverage.png" width="300" height="150">
 
 ### UI
 The app code works on
@@ -25,6 +24,7 @@ The app code works on
 <tr>
 <td>Android</td>
 <td>Browser</td>
+<td>JVM</td>
 <td>other platforms</td>
 </tr>
 <tr>
@@ -39,10 +39,15 @@ The app code works on
 
 </td>
 <td valign="top">
-
-work in progress, coming soon :-)
+<img src="app_jvm.png" width="300" height="200">
 
 </td>
+
+<td valign="top">
+work in progress, coming soon :-)
+</td>
+
+
 </tr>
 </tbody>
 </table>
