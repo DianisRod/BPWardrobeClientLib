@@ -15,6 +15,6 @@ actual fun provideHttpClient(): io.ktor.client.HttpClient {
     return client
 }
 
-actual suspend fun getWardrobeItems(): List<WardrobeItem> {
-    return WardrobeClient().commonGetWardrobeItems()
+actual suspend fun getWardrobeItems(color: String?, category: String?): List<WardrobeItem> {
+    return WardrobeClient().commonGetWardrobeItems(color, category)
 }

@@ -5,7 +5,7 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 
 expect fun provideHttpClient(): HttpClient
-expect suspend fun getWardrobeItems(): List<WardrobeItem>
+expect suspend fun getWardrobeItems(color: String?, category: String?): List<WardrobeItem>
 
 val URL : String = "https://assets.www.bonprix.com"
 val PORT : String = "443" // HTTPS
@@ -17,10 +17,10 @@ class WardrobeClient {
         val client = provideHttpClient()
         val fullPath = "$URL:$PORT$ENDPOINT"
         var wardrobeItems : List<WardrobeItem> = client.get(fullPath).body()
-        if (color != null) {
+        if (!color.isNullOrBlank()) {
             wardrobeItems= wardrobeItems.filter { it.color == color }
         }
-        if (category != null) {
+        if (!category.isNullOrBlank()) {
             wardrobeItems = wardrobeItems.filter { it.category == category }
         }
         return wardrobeItems
@@ -42,9 +42,9 @@ class WardrobeClient {
         return getItems().filter { it.compatibleWith.contains(compatibleItem) }
     }
 
-    suspend fun commonGetWardrobeItems(): List<WardrobeItem> {
+    suspend fun commonGetWardrobeItems(color: String?, category: String?): List<WardrobeItem> {
         try {
-            val items : List<WardrobeItem> = WardrobeClient().getItems()
+            val items : List<WardrobeItem> = WardrobeClient().getItems(color, category)
             return items
         }catch (e: Throwable ) {
             e.printStackTrace()
