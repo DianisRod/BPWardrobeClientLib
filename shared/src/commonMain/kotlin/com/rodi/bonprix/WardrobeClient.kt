@@ -2,11 +2,7 @@ package com.rodi.bonprix
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
-import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.json.Json
 
 expect fun provideHttpClient(): HttpClient
 expect suspend fun getWardrobeItems(): List<WardrobeItem>
@@ -40,6 +36,20 @@ class WardrobeClient {
 
     suspend fun getItemById(id: String): WardrobeItem? {
         return getItems().find { it.id.toString() == id }
+    }
+
+    suspend fun getItemByCompatibleItem(compatibleItem: String): WardrobeItem? {
+        return TODO()
+    }
+
+    suspend fun commonGetWardrobeItems(): List<WardrobeItem> {
+        try {
+            val items : List<WardrobeItem> = WardrobeClient().getItems()
+            return items
+        }catch (e: Throwable ) {
+            e.printStackTrace()
+            return emptyList()
+        }
     }
 
 }
