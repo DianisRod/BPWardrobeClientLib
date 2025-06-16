@@ -12,7 +12,6 @@ class WardrobeClientTest {
         const val CATEGORY: String = "Jacket"
         const val COLOR: String = "White"
         const val COMPATIBLE_ITEM: String = "Dress"
-
     }
 
     @Test

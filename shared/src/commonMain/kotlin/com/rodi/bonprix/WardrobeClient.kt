@@ -16,6 +16,7 @@ class WardrobeClient {
     suspend fun getItems(color: String?=null, category: String?=null): List<WardrobeItem> {
         val client = provideHttpClient()
         val fullPath = "$URL:$PORT$ENDPOINT"
+        //Todo: use pagination to handle large responses with many items
         var wardrobeItems : List<WardrobeItem> = client.get(fullPath).body()
         if (!color.isNullOrBlank()) {
             wardrobeItems= wardrobeItems.filter { it.color == color }
